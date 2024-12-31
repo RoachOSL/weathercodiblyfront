@@ -7,7 +7,7 @@
       <p class="spinner-text">Fetching weather data, please wait...</p>
     </div>
 
-    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    <p v-else-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
     <div v-else class="container">
       <div class="row">
