@@ -7,6 +7,8 @@
       <p class="spinner-text">Fetching weather data, please wait...</p>
     </div>
 
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+
     <div v-else class="container">
       <div class="row">
         <div class="col-12 col-lg-6 d-flex mb-3">
@@ -34,8 +36,6 @@
         :summary="summaryData.forecastSummary"
       />
     </div>
-
-    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
 
@@ -81,13 +81,13 @@ export default {
           },
           () => {
             this.handleDefaultLocation(
-              "Unable to fetch your location. Using default coordinates (Kraków)."
+              "Unable to fetch your location. Using default coordinates (Cracow)."
             );
           }
         );
       } else {
         this.handleDefaultLocation(
-          "Geolocation is not supported by your browser. Using default coordinates (Kraków)."
+          "Geolocation is not supported by your browser. Using default coordinates (Cracow)."
         );
       }
     },
