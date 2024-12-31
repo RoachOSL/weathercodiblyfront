@@ -1,13 +1,15 @@
 <template>
   <div id="app">
+    <div v-if="errorMessage" class="error-message-wrapper">
+      <p class="error-message">{{ errorMessage }}</p>
+    </div>
+
     <div v-if="loading" class="spinner-container">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
       <p class="spinner-text">Fetching weather data, please wait...</p>
     </div>
-
-    <p v-else-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
     <div v-else class="container">
       <div class="row">
@@ -61,8 +63,8 @@ export default {
       forecastData: [],
       avgSunExposureHours: 0,
       loading: true,
-      latitude: null,
-      longitude: null,
+      latitude: 50.049683,
+      longitude: 19.944544,
       errorMessage: "",
     };
   },
@@ -94,9 +96,11 @@ export default {
     handleDefaultLocation(message) {
       console.error(message);
       this.errorMessage = message;
-      this.latitude = 50.049683;
-      this.longitude = 19.944544;
-      this.loadWeatherData(this.latitude, this.longitude);
+
+      setTimeout(() => {
+        this.errorMessage = "";
+        this.loadWeatherData(this.latitude, this.longitude);
+      }, 3000);
     },
     async loadWeatherData(latitude, longitude) {
       try {
@@ -138,6 +142,8 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .spinner-container {
@@ -160,7 +166,8 @@ export default {
 
 .error-message {
   color: var(--error-color);
+  font-size: 2rem;
+  font-weight: bold;
   text-align: center;
-  margin-top: 10px;
 }
 </style>
