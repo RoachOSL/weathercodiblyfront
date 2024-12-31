@@ -25,7 +25,7 @@
         <div class="col">
           <i class="fas fa-sun footer-icon"></i>
           <strong>Average Sun Exposure:</strong>
-          <span> {{ avgSunExposure }} hours</span>
+          <span> {{ avgSunExposure }} </span>
         </div>
       </div>
 

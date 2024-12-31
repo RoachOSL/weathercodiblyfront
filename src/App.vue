@@ -61,7 +61,7 @@ export default {
     return {
       summaryData: {},
       forecastData: [],
-      avgSunExposureHours: 0,
+      avgSunExposureHours: "",
       loading: true,
       latitude: 50.049683,
       longitude: 19.944544,
@@ -110,9 +110,13 @@ export default {
         ]);
         this.summaryData = summary;
         this.forecastData = forecast;
-        this.avgSunExposureHours = (
-          summary.avgSunshineDurationSeconds / 3600
-        ).toFixed(2);
+
+        const avgSunshineDurationHours =
+          summary.avgSunshineDurationSeconds / 3600;
+        const hours = Math.floor(avgSunshineDurationHours);
+        const minutes = Math.round((avgSunshineDurationHours - hours) * 60);
+
+        this.avgSunExposureHours = `${hours} hours ${minutes} minutes`;
       } catch (error) {
         console.error("Failed to fetch weather data:", error.message);
         this.errorMessage =
